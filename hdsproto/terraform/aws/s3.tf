@@ -3,10 +3,10 @@ resource "aws_s3_bucket" "app_data" {
   bucket = "${var.project_name}-app-data-${var.environment}"
 
   tags = merge(var.tags, {
-    Name           = "app-data-bucket"
-    Purpose        = "Application data storage"
-    SecurityLevel  = "high"           # SECURITY: Added compliance tag
-    DataClassification = "sensitive"  # SECURITY: Added classification
+    Name               = "app-data-bucket"
+    Purpose            = "Application data storage"
+    SecurityLevel      = "high"      # SECURITY: Added compliance tag
+    DataClassification = "sensitive" # SECURITY: Added classification
   })
 }
 
@@ -47,10 +47,10 @@ resource "aws_s3_bucket" "user_uploads" {
   bucket = "${var.project_name}-user-uploads-${var.environment}"
 
   tags = merge(var.tags, {
-    Name           = "user-uploads-bucket"
-    Purpose        = "User uploaded content"
-    SecurityLevel  = "medium"         # SECURITY: Added compliance tag
-    DataClassification = "public"     # SECURITY: Added classification
+    Name               = "user-uploads-bucket"
+    Purpose            = "User uploaded content"
+    SecurityLevel      = "medium" # SECURITY: Added compliance tag
+    DataClassification = "public" # SECURITY: Added classification
   })
 }
 
@@ -105,10 +105,10 @@ resource "aws_s3_bucket" "app_logs" {
   bucket = "${var.project_name}-app-logs-${var.environment}"
 
   tags = merge(var.tags, {
-    Name           = "app-logs-bucket"
-    Purpose        = "Application logging"
-    SecurityLevel  = "high"           # SECURITY: Added compliance tag
-    DataClassification = "internal"   # SECURITY: Added classification
+    Name               = "app-logs-bucket"
+    Purpose            = "Application logging"
+    SecurityLevel      = "high"     # SECURITY: Added compliance tag
+    DataClassification = "internal" # SECURITY: Added classification
   })
 }
 

@@ -3,9 +3,9 @@ variable "allowed_cidr_blocks" {
   description = "CIDR blocks allowed to access the application"
   type        = list(string)
   default = [
-    "10.0.0.0/8",      # Internal network
-    "172.16.0.0/12",   # Internal network
-    "192.168.0.0/16"   # Internal network
+    "10.0.0.0/8",    # Internal network
+    "172.16.0.0/12", # Internal network
+    "192.168.0.0/16" # Internal network
   ]
 }
 
@@ -89,10 +89,10 @@ resource "aws_security_group" "app_internal" {
   }
 
   egress {
-    description = "Allow to database"
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
+    description     = "Allow to database"
+    from_port       = 5432
+    to_port         = 5432
+    protocol        = "tcp"
     security_groups = [aws_security_group.database.id]
   }
 
