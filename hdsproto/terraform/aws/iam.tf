@@ -18,7 +18,7 @@ resource "aws_iam_role" "app_service" {
   tags = var.tags
 }
 
-# IAM policy for S3 access
+# IAM policy for S3 access (DRIFT FIX: added missing actions)
 resource "aws_iam_policy" "s3_access" {
   name        = "${var.project_name}-s3-access"
   description = "Allow access to application S3 buckets"
@@ -30,12 +30,26 @@ resource "aws_iam_policy" "s3_access" {
         Effect = "Allow"
         Action = [
           "s3:GetObject",
-          "s3:PutObject"
+          "s3:PutObject",
+          "s3:DeleteObject",      # DRIFT FIX: was missing but in use
+          "s3:ListBucket"         # DRIFT FIX: was missing but in use
         ]
         Resource = [
           "${aws_s3_bucket.app_data.arn}/*",
-          "${aws_s3_bucket.user_uploads.arn}/*"
+          "${aws_s3_bucket.user_uploads.arn}/*",
+          aws_s3_bucket.app_data.arn,          # DRIFT FIX: for ListBucket
+          aws_s3_bucket.user_uploads.arn       # DRIFT FIX: for ListBucket
         ]
+      },
+      {
+        # DRIFT FIX: CloudWatch Logs permission was in use but not in code
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "arn:aws:logs:${var.aws_region}:*:log-group:/aws/${var.project_name}/*"
       }
     ]
   })
