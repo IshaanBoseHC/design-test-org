@@ -1,8 +1,8 @@
 terraform {
-  required_providers {
-    terraform = {
-      source  = "hashicorp/terraform"
-      version = ">= 1.5.0"
+  cloud {
+    organization = "hashicorp-design-test-org"
+    workspaces {
+      name = "hcp-design-app-checkout"
     }
   }
 }

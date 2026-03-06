@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"service","Source":"app.terraform.io/hashicorp-design-test-org/service/test","Version":"1.0.0","Dir":".terraform/modules/service"},{"Key":"tags","Source":"app.terraform.io/hashicorp-design-test-org/tags/test","Version":"1.0.0","Dir":".terraform/modules/tags"}]}

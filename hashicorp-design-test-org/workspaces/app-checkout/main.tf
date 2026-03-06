@@ -3,15 +3,16 @@ terraform {
 }
 
 module "tags" {
-  source      = "app.terraform.io/${var.registry_namespace}/tags/terraform"
+  source      = "app.terraform.io/hashicorp-design-test-org/tags/test"
   team        = "app"
   environment = var.environment
   service     = "checkout"
   cost_center = "cc-2001"
+  ishaan = "owner"
 }
 
 module "service" {
-  source       = "app.terraform.io/${var.registry_namespace}/service/terraform"
+  source       = "app.terraform.io/hashicorp-design-test-org/service/test"
   service_name = "checkout"
   environment  = var.environment
   network_id   = var.network_id
