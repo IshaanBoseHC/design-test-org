@@ -1,3 +1,13 @@
+# S3 bucket for my application data
+resource "aws_s3_bucket" "my_app_data" {
+  bucket = "${var.project_name}-my-app-data-${var.environment}"
+
+  tags = merge(var.tags, {
+    Name    = "my-app-data-bucket"
+    Purpose = "Primary application data storage"
+  })
+}
+
 # S3 bucket for application data
 resource "aws_s3_bucket" "app_data" {
   bucket = "${var.project_name}-app-data-${var.environment}"
