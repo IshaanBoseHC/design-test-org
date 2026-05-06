@@ -8,6 +8,21 @@ resource "aws_s3_bucket" "my_app_data" {
   })
 }
 
+# REMEDIATION: Enable KMS encryption for my_app_data bucket
+# Detected: S3 bucket has no server-side encryption configured
+# Risk: Data at rest is unencrypted, violating security compliance requirements
+resource "aws_s3_bucket_server_side_encryption_configuration" "my_app_data" {
+  bucket = aws_s3_bucket.my_app_data.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "aws:kms"
+      kms_master_key_id = aws_kms_key.s3_encryption.arn
+    }
+    bucket_key_enabled = true
+  }
+}
+
 # S3 bucket for application data
 resource "aws_s3_bucket" "app_data" {
   bucket = "${var.project_name}-app-data-${var.environment}"
